@@ -2,7 +2,14 @@ const express = require('express');
 
 const app = express();
 
-app.get('/hello', (req,res) => {
+const corsOption = {
+    origin: 'https://abc.com',
+    optionsSuccessStatus: 200
+}
+
+app.use(cors(corsOption));
+
+app.get('/hello', enforceScope('read:hello-world') (req,res) => {
     res.send('Hello, World!');
 })
 
